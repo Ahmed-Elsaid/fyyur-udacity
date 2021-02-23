@@ -305,7 +305,7 @@ def show_artist(artist_id):
     "seeking_venue": artist.seeking_venue,
     "seeking_description": artist.seeking_description if artist.seeking_venue else '',
     "image_link": artist.image_link,
-    "songs": artist.songs,
+    "songs": artist.songs or [],
     "past_shows": displayShows(past_shows),
     "upcoming_shows": displayShows(upcoming_shows),
     "past_shows_count": len(past_shows),
@@ -320,6 +320,8 @@ def show_artist(artist_id):
 @app.route('/artists/<int:artist_id>/edit', methods=['GET'])
 def edit_artist(artist_id):
   artist = Artist.query.get(artist_id)
+  if artist.songs == None:
+        artist.songs = []
   artist.songs = ','.join(artist.songs)
   if not artist:
         return render_template('errors/404.html'), 404
