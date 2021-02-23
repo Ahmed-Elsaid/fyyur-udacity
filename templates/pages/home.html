@@ -1,0 +1,51 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Fyyur{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-sm-6">
+		<h1>Fyyur 🔥</h1>
+		<p class="lead">Where musical artists meet musical venues.</p>
+		<h3>
+			<a href="/venues"><button class="btn btn-primary btn-lg">Find a venue</button></a>
+			<a href="/venues/create"><button class="btn btn-default btn-lg">Post a venue</button></a>
+		</h3>
+		<h3>
+			<a href="/artists"><button class="btn btn-primary btn-lg">Find an artist</button></a>
+			<a href="/artists/create"><button class="btn btn-default btn-lg">Post an artist</button></a>
+		</h3>
+		<p class="lead">Publicize about your show for free.</p>
+		<h3>
+			<a href="/shows/create"><button class="btn btn-default btn-lg">Post a show</button></a>
+		</h3>
+	</div>
+	<div class="col-sm-6 hidden-sm hidden-xs">
+		<img id="front-splash" src="{{ url_for('static',filename='img/front-splash.jpg') }}" alt="Front Photo of Musical Band" />
+	</div>
+	<div class="row" style="width:50vw">
+		<div class="col-sm-6">
+			{%if venues|length > 0%}
+			<p class="lead">Recently Listed Venues</p>
+			<div class="list-group">
+				{% for venue in venues%}
+				<a href="/venues/{{venue.id}}" class="list-group-item">{{venue.name}}</a>
+				{% endfor %}
+			</div>
+			{%else%}
+			<p class="lead">There're no Venues Listed yet</p>
+			{%endif%}
+		</div>
+		<div class="col-sm-6">
+			{%if artists|length > 0%}
+			<p class="lead">Recently Listed Artist</p>
+			<div class="list-group">
+				{% for artist in artists%}
+				<a href="/artists/{{artist.id}}" class="list-group-item">{{artist.name}}</a>
+				{% endfor %}
+			</div>
+			{%else%}
+			<p class="lead">There're no Artists Listed yet</p>
+			{%endif%}
+		</div>
+	</div>
+</div>
+{% endblock %}
